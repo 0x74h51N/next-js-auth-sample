@@ -9,13 +9,13 @@ To get started with this project, follow these steps:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/0x74h51N/cookies-samples
+git clone https://github.com/0x74h51N/next-js-auth-sample
 ```
 
 2. Navigate to the project directory
 
 ```bash
-cd cookies-samples
+cd next-js-auth-sample
 ```
 3. Install dependencies
 
