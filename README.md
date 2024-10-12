@@ -1,6 +1,5 @@
-This repository created for Next.js Cookie Management [article](https://crunchypix.com/en/blog/next-js-session). 
+This repository created for Next.js Session Management [article](https://crunchypix.com/en/blog/next-js-session). 
 
-It contains practical examples and implementations to help you understand and apply various cookie handling techniques in Next.js.
 
 ## Getting Started
 
