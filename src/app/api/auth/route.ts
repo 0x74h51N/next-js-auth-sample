@@ -42,14 +42,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ errors: errorMessage }, { status: 401 });
     }
 
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      console.error("Configuration error: JWT Secret is missing.");
+      return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
+
     // Create JWT token
-    const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
+    const secretKey = new TextEncoder().encode(secret);
     const token = await new SignJWT({ id: user.id })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime("1h") // Token validity period
       .sign(secretKey);
 
-    const production = process.env.NODE_ENV === "production";
+    const production = process.env.VERCEL_ENV === "production";
 
     // Set the JWT token as an HttpOnly cookie
     const response = NextResponse.json({ message: "Login successful" });

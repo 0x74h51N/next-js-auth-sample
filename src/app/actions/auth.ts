@@ -7,8 +7,6 @@ import { mockUsers } from "src/lib/mockDB";
 import { FormState } from "src/lib/common.types";
 import { redirect } from "next/navigation";
 
-const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
-
 export async function submitAction(
   _prevState: FormState,
   formData: FormData
@@ -42,14 +40,23 @@ export async function submitAction(
       return { errors: errorMessage };
     }
 
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      console.error("Configuration error: JWT Secret is missing.");
+      return { errors: { email: "Server error" } };
+    }
+    const secretKey = new TextEncoder().encode(secret);
+
     const token = await new SignJWT({ id: user.id })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime("155secs")
       .sign(secretKey);
 
+    const production = process.env.VERCEL_ENV === "production";
+
     cookies().set("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: production,
       sameSite: "strict",
       maxAge: 150,
     });
