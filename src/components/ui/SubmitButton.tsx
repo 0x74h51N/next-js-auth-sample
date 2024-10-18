@@ -1,9 +1,9 @@
 import { Loader, ChevronRight } from "lucide-react";
 import React from "react";
-import { useFormStatus } from "react-dom";
+//import { useFormStatus } from "react-dom";
 
-function SubmitButton({ text }: { text: string }) {
-  const { pending } = useFormStatus();
+function SubmitButton({ text, pending }: { text: string; pending: boolean }) {
+  //const { pending } = useFormStatus();
   return (
     <button aria-disabled={pending} type="submit" className="button mt-20">
       {pending ? (

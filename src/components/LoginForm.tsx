@@ -9,7 +9,7 @@ import SubmitButton from "./ui/SubmitButton";
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const [state, action] = useActionState(submitAction, {
+  const [state, action, pending] = useActionState(submitAction, {
     errors: {
       email: "",
       password: "",
@@ -79,7 +79,7 @@ const LoginForm = () => {
         <p className="text-sm text-green-500">{state?.message}</p>
       )}
       <div>
-        <SubmitButton text="Login" />
+        <SubmitButton text="Login" pending={pending} />
       </div>
     </form>
   );
