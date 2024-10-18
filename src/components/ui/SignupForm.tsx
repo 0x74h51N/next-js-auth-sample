@@ -15,7 +15,7 @@ const RegisterForm = ({
     password: false,
     confirmPassword: false,
   });
-  const [state, action] = useActionState(registerAction, undefined);
+  const [state, action, pending] = useActionState(registerAction, undefined);
 
   const toggleShowPassword = (fieldName: keyof typeof showPassword) => {
     setShowPassword((prev) => ({
@@ -152,7 +152,7 @@ const RegisterForm = ({
         {state?.message === "Register successful" ? (
           <Check />
         ) : (
-          <SubmitButton text="Register" />
+          <SubmitButton text="Register" pending={pending} />
         )}
       </div>
     </form>
