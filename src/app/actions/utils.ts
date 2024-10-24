@@ -4,7 +4,8 @@ import { cookies } from "next/headers";
 const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export const verifySession = async () => {
-  const token = cookies().get("token");
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get("token");
   if (!token) {
     return false;
   }

@@ -7,7 +7,8 @@ import React from "react";
 async function DashboardPage() {
   const key = process.env.JWT_SECRET;
   const secretKey = new TextEncoder().encode(key);
-  const token = cookies().get("token")?.value;
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get("token")?.value;
 
   if (!token) {
     redirect("/login");

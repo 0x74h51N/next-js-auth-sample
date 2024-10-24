@@ -54,7 +54,9 @@ export async function submitAction(
 
     const production = process.env.VERCEL_ENV === "production";
 
-    cookies().set("token", token, {
+    const cookiesStore = await cookies();
+
+    cookiesStore.set("token", token, {
       httpOnly: true,
       secure: production,
       sameSite: "strict",
@@ -69,6 +71,7 @@ export async function submitAction(
 }
 
 export const logout = async () => {
-  cookies().delete("token");
+  const cookiesStore = await cookies();
+  cookiesStore.delete("token");
   redirect("/login");
 };

@@ -12,7 +12,8 @@ export default async function Layout({
 }>) {
   const key = process.env.JWT_SECRET;
   const secretKey = new TextEncoder().encode(key);
-  const token = cookies().get("token")?.value;
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get("token")?.value;
   let user = null;
   if (!token) {
     redirect("/login");
