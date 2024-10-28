@@ -1,14 +1,10 @@
 import WeatherWidget from "./WeatherWidget";
 import UserMenu from "./UserMenu";
-import { jwtVerify } from "jose";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { mockUsers } from "src/lib/mockDB";
 import { verifySession } from "src/app/actions/utils";
 
 export default async function Navbar() {
-  const key = process.env.JWT_SECRET;
-  const secretKey = new TextEncoder().encode(key);
   const token = await verifySession();
   if (!token) {
     redirect("/login");
